@@ -1,0 +1,21 @@
+= Summary
+
+Summary::  CouchDB module
+Author::   Thomas Vander Stichele <thomas (at) apestaart (dot) org>
+License::  Apache License 2.0
+Updated::  February 2012
+
+= Sample Usage
+
+Set up a standard CouchDB service :
+
+    couchdb {'couchdb': }
+
+Set up an alternate CouchDB service with a different service name :
+
+    couchdb {'couchdb-feat':
+        port    => 5985,
+    }
+
+(This only works with a modified couchdb package that allows symlinking
+ the service script to run with a different configuration)
