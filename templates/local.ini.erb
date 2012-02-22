@@ -7,8 +7,13 @@
 [couchdb]
 ;max_document_size = 4294967296 ; bytes
 
+database_dir = /var/lib/<%= title %>
+view_index_dir = /var/lib/<%= title %>
+uri_file = /var/lib/<%= title %>/couch.uri
+
 [httpd]
 ;port = 5984
+port = <%= port %>
 ;bind_address = 127.0.0.1
 ; Uncomment next line to trigger basic-auth popup on unauthorized requests.
 ;WWW-Authenticate = Basic realm="administrator"
@@ -22,6 +27,7 @@ secret = 1755dc5024598c14a1e0e7e802d3c925
 
 [log]
 ;level = debug
+file = /var/log/<%= title %>/couch.log
 
 
 ; To enable Virtual Hosts in CouchDB, add a vhost = path directive. All requests to

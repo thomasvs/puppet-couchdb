@@ -1,5 +1,6 @@
-class couchdb {
-    include couchdb::config
-    include couchdb::install
-    include couchdb::service
+define couchdb ($port=5984) {
+    couchdb::config {$name:
+        port    => $port,
+    }
+    couchdb::service {$name: }
 }

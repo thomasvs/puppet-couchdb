@@ -1,9 +1,9 @@
-class couchdb::service {
-    service { 'couchdb':
+define couchdb::service () {
+    service { $name:
         ensure => running,
         hasstatus => true,
         hasrestart => true,
         enable => true,
-        require => Class['couchdb::config'],
+        require => Couchdb::Config[$name],
     }
 }
