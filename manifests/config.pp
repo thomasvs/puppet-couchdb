@@ -1,4 +1,4 @@
-define couchdb::config ($port=5984) {
+define couchdb::config ($port=5984, $query_servers=[]) {
     $owner    = 'couchdb'
     $group    = 'root'
     $mode     = '0644'

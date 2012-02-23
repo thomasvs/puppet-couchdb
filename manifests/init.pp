@@ -1,6 +1,7 @@
-define couchdb ($port=5984) {
+define couchdb ($port=5984, $query_servers=[]) {
     couchdb::config {$name:
-        port    => $port,
+        port          => $port,
+        query_servers => $query_servers,
     }
     couchdb::service {$name: }
 }
