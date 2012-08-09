@@ -8,17 +8,17 @@ define couchdb::config ($port=5984, $query_servers=[]) {
     include couchdb::install
 
     file { "/etc/$name":
+        ensure  => directory,
         owner   => $dirowner,
         group   => $group,
         mode    => $dirmode,
-        ensure  => directory,
     }
 
     file { "/etc/$name/local.ini":
+        ensure  => file,
         owner   => $owner,
         group   => $group,
         mode    => $mode,
-        ensure  => file,
         content => template('couchdb/local.ini.erb'),
         require => [
             File["/etc/$name"],
@@ -31,17 +31,17 @@ define couchdb::config ($port=5984, $query_servers=[]) {
     }
 
     file { "/var/lib/$name":
+        ensure  => directory,
         owner   => $dirowner,
         group   => $group,
         mode    => $dirmode,
-        ensure  => directory,
     }
 
     file { "/var/log/$name":
+        ensure  => directory,
         owner   => $dirowner,
         group   => $group,
         mode    => $dirmode,
-        ensure  => directory,
     }
 
     # if it's not the standard service name, symlink the new service script

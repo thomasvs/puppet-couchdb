@@ -1,18 +1,18 @@
 class couchdb::install {
-    package { 'couchdb':
-        ensure => present,
-        require => User['couchdb'],
-    }
+  package { 'couchdb':
+    ensure  => present,
+    require => User['couchdb'],
+  }
 
-   user { 'couchdb':
-        ensure => present,
+  user { 'couchdb':
+        ensure  => present,
         comment => 'Couchdb Database Server',
-        gid => 'couchdb',
-        home => '/var/lib/couchdb',
+        gid     => 'couchdb',
+        home    => '/var/lib/couchdb',
         require => Group['couchdb'],
-   }
+  }
 
-   group { 'couchdb':
+  group { 'couchdb':
         ensure => present,
-   }
+  }
 }
