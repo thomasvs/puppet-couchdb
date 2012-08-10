@@ -1,3 +1,29 @@
+# == Define: couchdb::config
+#
+# Create configuration for a couchdb service.
+#
+# === Parameters
+#
+#
+# [*namevar*]
+#   name of the couchdb service.  Should start with 'couchdb'
+#
+# [*query_servers*]
+#   a list of query servers to use
+#
+# === Examples
+#
+#   couchdb::config { 'couchdb-feat':
+#     port          => 5985,
+#     query_servers => [
+#       "python = /usr/bin/feat-couchpy",
+#     ]
+#   }
+#
+# === Authors
+#
+# Thomas Vander Stichele <thomas (at) apestaart (dot) org>
+
 define couchdb::config ($port=5984, $query_servers=[]) {
     $owner    = 'couchdb'
     $group    = 'root'
