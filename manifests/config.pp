@@ -5,6 +5,10 @@ define couchdb::config ($port=5984, $query_servers=[]) {
     $dirowner = 'couchdb'
     $dirmode  = '0755'
 
+    if $name !~ /^couchdb/ {
+        fail("Couchdb::Config[${name}]: namevar must start with couchdb")
+    }
+
     include couchdb::install
 
     file { "/etc/$name":
