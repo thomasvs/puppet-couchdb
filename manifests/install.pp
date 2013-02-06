@@ -5,14 +5,14 @@ class couchdb::install {
   }
 
   user { 'couchdb':
-        ensure  => present,
-        comment => 'Couchdb Database Server',
-        gid     => 'couchdb',
-        home    => '/var/lib/couchdb',
-        require => Group['couchdb'],
+    ensure  => present,
+    comment => 'Couchdb Database Server',
+    gid     => 'couchdb',
+    home    => '/var/lib/couchdb',
+    require => Group['couchdb'],
   }
 
   group { 'couchdb':
-        ensure => present,
+    ensure => present,
   }
 }
