@@ -88,4 +88,12 @@ define couchdb::config ($port=5984, $query_servers=[]) {
         require  => Class['couchdb::install'],
     }
   }
+
+  # if it's not the standard service name, install the logrotate script
+  if $name != 'couchdb' {
+    file { "/etc/logrotate.d/${name}":
+      ensure  => file,
+      content => template('couchdb/logrotate.d/couchdb.erb')
+    }
+  }
 }
