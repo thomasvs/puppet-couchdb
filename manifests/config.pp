@@ -1,29 +1,32 @@
-# == Define: couchdb::config
+# = Define couchdb::config
 #
-# Create configuration for a couchdb service.
+# This define creates configuration for CouchDB.
+# This class is a define because it can create multiple service
+# configurations.
 #
-# === Parameters
+# == Parameters
 #
-#
-# [*namevar*]
+# [* namevar *]
 #   name of the couchdb service.  Should start with 'couchdb'
 #
-# [*query_servers*]
-#   a list of query servers to use
+# [* port *]
+#   The port to run CouchDB on.
+#   Default: 5984
 #
-# === Examples
+# [* query_servers *]
+#   A list of additional query servers to run.
+#   The format is: language = binary
 #
-#   couchdb::config { 'couchdb-feat':
-#     port          => 5985,
-#     query_servers => [
-#       "python = /usr/bin/feat-couchpy",
-#     ]
-#   }
+# == Examples
+#     couchdb::config { 'couchdb-feat':
+#        port => 5985,
+#        query_servers => [
+#            "python = /usr/bin/feat-couchpy",
+#        ],
+#    }
 #
-# === Authors
-#
-# Thomas Vander Stichele <thomas (at) apestaart (dot) org>
-
+# == Author
+#   Thomas Vander Stichele (thomas (at) apestaart (dot) org
 define couchdb::config ($port=5984, $query_servers=[]) {
   $owner    = 'couchdb'
   $group    = 'root'
@@ -80,9 +83,9 @@ define couchdb::config ($port=5984, $query_servers=[]) {
       ensure => link,
       target => 'couchdb',
     }
-    } else {
-      file { "/etc/rc.d/init.d/${name}":
+  } else {
+    file { "/etc/rc.d/init.d/${name}":
         require  => Class['couchdb::install'],
-      }
     }
+  }
 }
