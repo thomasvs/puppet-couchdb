@@ -7,13 +7,13 @@
 [couchdb]
 ;max_document_size = 4294967296 ; bytes
 
-database_dir = /var/lib/<%= title %>
-view_index_dir = /var/lib/<%= title %>
-uri_file = /var/lib/<%= title %>/couch.uri
+database_dir = /var/lib/<%= @title %>
+view_index_dir = /var/lib/<%= @title %>
+uri_file = /var/lib/<%= @title %>/couch.uri
 
 [httpd]
 ;port = 5984
-port = <%= port %>
+port = <%= @port %>
 <% if @bind_address -%>
 bind_address = <%= @bind_address %>
 <% else -%>
@@ -37,11 +37,11 @@ secret = 1755dc5024598c14a1e0e7e802d3c925
 
 [log]
 ;level = debug
-file = /var/log/<%= title %>/couch.log
+file = /var/log/<%= @title %>/couch.log
 
-<% if ! query_servers.empty? -%>
+<% if ! @query_servers.empty? -%>
 [query_servers]
-<% query_servers.each do |val| -%>
+<% @query_servers.each do |val| -%>
 <%= val %>
 <% end -%>
 <% end -%>
@@ -66,7 +66,7 @@ file = /var/log/<%= title %>/couch.log
 ; changing this.
 [admins]
 ;admin = mysecretpassword
-<% admins.each do |key, value| -%>
+<% @admins.each do |key, value| -%>
 <%= key %> = <%= value %>
 <% end -%>
 
