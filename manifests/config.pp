@@ -27,7 +27,11 @@
 #
 # == Author
 #   Thomas Vander Stichele (thomas (at) apestaart (dot) org
-define couchdb::config ($port=5984, $query_servers=[]) {
+define couchdb::config (
+  $port=5984,
+  $query_servers=[],
+  $admins={}
+) {
   $owner    = 'couchdb'
   $group    = 'root'
   $mode     = '0644'
