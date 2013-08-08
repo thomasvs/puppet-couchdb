@@ -55,7 +55,6 @@ file = /var/log/<%= title %>/couch.log
 ; 'username = password' lines. Don't forget to restart CouchDB after
 ; changing this.
 [admins]
-<%= admins %>
 ;admin = mysecretpassword
 <% admins.each do |key, value| -%>
 <%= key %> = <%= value %>
