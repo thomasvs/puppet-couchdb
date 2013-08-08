@@ -2,6 +2,7 @@ NAME=couchdb
 
 test: $(NAME)
 	puppet apply --modulepath=`pwd`/$(NAME) --noop manifests/init.pp
+	rake spec
 
 # FIXME: document then remove the no-documentation-check
 check:
