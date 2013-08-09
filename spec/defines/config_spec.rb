@@ -57,5 +57,17 @@ describe 'couchdb::config' do
     end
   end
 
+  context 'config for couchdb-feat with bind_address 0.0.0.0' do
+    let(:title) { 'couchdb-feat' }
+    let(:params) { {
+        :bind_address => '0.0.0.0'
+    } }
+
+    it do
+      should contain_file('/etc/couchdb-feat/local.ini') \
+        .with_content(/^bind_address = 0.0.0.0/)
+    end
+  end
+
 
 end

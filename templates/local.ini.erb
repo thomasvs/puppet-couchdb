@@ -14,7 +14,11 @@ uri_file = /var/lib/<%= title %>/couch.uri
 [httpd]
 ;port = 5984
 port = <%= port %>
+<% if @bind_address -%>
+bind_address = <%= @bind_address %>
+<% else -%>
 ;bind_address = 127.0.0.1
+<% end -%>
 ; Uncomment next line to trigger basic-auth popup on unauthorized requests.
 ;WWW-Authenticate = Basic realm="administrator"
 

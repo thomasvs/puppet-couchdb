@@ -13,12 +13,18 @@
 #   The port to run CouchDB on.
 #   Default: 5984
 #
+# [* bind_address *]
+#   The address for CouchDB to bind to.
+#   Default: 127.0.0.1
+#
 # [* query_servers *]
 #   A list of additional query servers to run.
 #   The format is: language = binary
 #
 # [* admins *]
-#   A dictionary of usernames and passwords for admin accounts
+#   A hash of usernames and passwords for admin accounts;
+#   the password can be plaintext, in which case couchdb will rewrite it,
+#   or hashed.
 #
 # [* require_valid_user *]
 #   Whether you require a valid user to access the database
@@ -35,6 +41,7 @@
 #   Thomas Vander Stichele (thomas (at) apestaart (dot) org
 define couchdb::config (
   $port=5984,
+  $bind_address=undef,
   $query_servers=[],
   $admins={},
   $require_valid_user=undef
