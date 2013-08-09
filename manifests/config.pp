@@ -17,6 +17,12 @@
 #   A list of additional query servers to run.
 #   The format is: language = binary
 #
+# [* admins *]
+#   A dictionary of usernames and passwords for admin accounts
+#
+# [* require_valid_user *]
+#   Whether you require a valid user to access the database
+#
 # == Examples
 #     couchdb::config { 'couchdb-feat':
 #        port => 5985,
@@ -30,7 +36,8 @@
 define couchdb::config (
   $port=5984,
   $query_servers=[],
-  $admins={}
+  $admins={},
+  $require_valid_user=undef
 ) {
   $owner    = 'couchdb'
   $group    = 'root'

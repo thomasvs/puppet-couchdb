@@ -24,11 +24,36 @@ describe 'couchdb::config' do
 
   context 'config for couchdb-feat with password' do
     let(:title) { 'couchdb-feat' }
-    let(:params) { { :admins => { 'admin1' => 'password1', 'admin2' => 'password2' } } }
+    let(:params) { {
+        :admins => { 'admin1' => 'password1', 'admin2' => 'password2' },
+        :require_valid_user => true
+    } }
 
     it do
       should contain_file('/etc/couchdb-feat/local.ini') \
-        .with_content(/admin1 = password1/)
+        .with_content(/admin1 = password1/) \
+        .with_content(/^require_valid_user = true/)
+    end
+  end
+
+  context 'config for couchdb-feat with require_valid_user false' do
+    let(:title) { 'couchdb-feat' }
+    let(:params) { {
+        :require_valid_user => false
+    } }
+
+    it do
+      should contain_file('/etc/couchdb-feat/local.ini') \
+        .with_content(/^require_valid_user = false/)
+    end
+  end
+
+  context 'config for couchdb-feat with require_valid_user undef' do
+    let(:title) { 'couchdb-feat' }
+
+    it do
+      should contain_file('/etc/couchdb-feat/local.ini') \
+        .with_content(/^; require_valid_user = false/)
     end
   end
 
