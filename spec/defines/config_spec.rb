@@ -69,5 +69,34 @@ describe 'couchdb::config' do
     end
   end
 
+  context 'config for couchdb-feat with only one ssl argument' do
+    let(:title) { 'couchdb-feat' }
+    let(:params) { {
+        :ssl_cert_file => '/etc/cert'
+    } }
+
+    it do
+      expect {
+        should contain_file('/etc/feat/local.ini')
+      }.to raise_error(Puppet::Error, /specify both/)
+    end
+  end
+
+  context 'config for couchdb-feat with all ssl arguments' do
+    let(:title) { 'couchdb-feat' }
+    let(:params) { {
+        :ssl_cert_file => '/etc/couchdb/cert.pem',
+        :ssl_key_file => '/etc/couchdb/key.pem',
+        :ssl_port => '7531'
+    } }
+
+    it do
+      should contain_file('/etc/couchdb-feat/local.ini') \
+        .with_content(/^cert_file = \/etc\/couchdb\/cert.pem/) \
+        .with_content(/^key_file = \/etc\/couchdb\/key.pem/) \
+        .with_content(/^port = 7531/)
+    end
+  end
+
 
 end

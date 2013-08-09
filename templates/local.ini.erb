@@ -69,3 +69,17 @@ file = /var/log/<%= title %>/couch.log
 <% admins.each do |key, value| -%>
 <%= key %> = <%= value %>
 <% end -%>
+
+<% if @ssl_cert_file -%>
+[daemons]
+httpsd = {couch_httpd, start_link, [https]}
+
+[ssl]
+cert_file = <%= @ssl_cert_file %>
+key_file = <%= @ssl_key_file %>
+<% if @ssl_port -%>
+port = <%= @ssl_port -%>
+<% else %>
+; port = 6984
+<% end -%>
+<% end -%>

@@ -9,9 +9,15 @@
 # [* namevar *]
 #   name of the couchdb service.  Should start with 'couchdb'
 #
-# [* port *]
-#   The port to run CouchDB on.
-#   Default: 5984
+# [* ssl_cert_file *]
+#   The SSL certificate file to use for SSL, in .pem format
+#
+# [* ssl_key *]
+#   The SSL key file to use for SSL, in .pem format
+#
+# [* ssl_port *]
+#   The SSL port to run CouchDB on.
+#   Default: 6984
 #
 # [* bind_address *]
 #   The address for CouchDB to bind to.
@@ -42,6 +48,9 @@
 define couchdb::config (
   $port=5984,
   $bind_address=undef,
+  $ssl_cert_file=undef,
+  $ssl_key_file=undef,
+  $ssl_port=undef,
   $query_servers=[],
   $admins={},
   $require_valid_user=undef
@@ -54,6 +63,9 @@ define couchdb::config (
 
   if $name !~ /^couchdb/ {
     fail("Couchdb::Config[${name}]: namevar must start with couchdb")
+  }
+  if bool2num($ssl_cert_file == undef) + bool2num($ssl_key_file == undef) == 1 {
+    fail('Couchdb::Config: specify both ssl_cert_file and ssl_key_file')
   }
 
   include couchdb::install
