@@ -1,0 +1,18 @@
+[Unit]
+Description=CouchDB Server for %I
+After=network.target
+
+[Service]
+User=couchdb
+Group=couchdb
+Type=notify
+StandardOutput=journal
+StandardError=journal
+Restart=always
+StartLimitInterval=10
+StartLimitBurst=5
+PIDFile=/var/run/couchdb/couchdb-%I.pid
+ExecStart=/usr/libexec/couchdb +Bd -noinput -sasl errlog_type error +K true +A 4 -couch_ini /etc/couchdb/default.ini /etc/couchdb/default.d/ /etc/couchdb-%I/local.d/ /etc/couchdb-%I/local.ini -s couch -pidfile /var/run/couchdb/couchdb-%I.pid
+
+[Install]
+WantedBy=multi-user.target

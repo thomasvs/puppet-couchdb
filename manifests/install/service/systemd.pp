@@ -1,11 +1,10 @@
-# = Class: couchdb::install::service
+# = Class: couchdb::install::service::systemd
 #
-# This class makes sure that an /etc/rc.d/init.d/couchdb exists.
-# In CentOS 7, systemd is now used, and until we adapt its package
-# to allow for multiple instances, we need the old service script
-# to symlink to.
+# This class makes sure that a systemd service script exists if needed.
+# This is a class because only one service script needs to be installed
+# for all instances
 #
-class couchdb::install::service {
+class couchdb::install::service::systemd {
   include couchdb::params
 
   if $couchdb::params::service == 'systemd' {

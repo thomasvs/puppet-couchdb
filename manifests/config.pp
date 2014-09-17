@@ -68,7 +68,7 @@ define couchdb::config (
     fail('Couchdb::Config: specify both ssl_cert_file and ssl_key_file')
   }
 
-  include couchdb::install
+  couchdb::install { $name: }
 
   file { "/etc/${name}":
     ensure  => directory,
@@ -87,8 +87,7 @@ define couchdb::config (
       File["/etc/${name}"],
       File["/var/lib/${name}"],
       File["/var/log/${name}"],
-      File["/etc/rc.d/init.d/${name}"],
-      Class['couchdb::install'],
+      Couchdb::Install[$name],
     ],
     notify  => Couchdb::Service[$name],
   }
@@ -106,21 +105,6 @@ define couchdb::config (
     group   => $group,
     mode    => $dirmode,
   }
-
-  # if it's not the standard service name, symlink the new service script
-  if $name != 'couchdb' {
-    file { "/etc/rc.d/init.d/${name}":
-      ensure => link,
-      target => 'couchdb',
-    }
-  } else {
-    file { "/etc/rc.d/init.d/${name}":
-        require  => Class['couchdb::install'],
-    }
-  }
-
-  # make sure we always have the service script
-  include couchdb::install::service
 
   # if it's not the standard service name, install the logrotate script
   if $name != 'couchdb' {
