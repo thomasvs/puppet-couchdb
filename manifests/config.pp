@@ -119,6 +119,9 @@ define couchdb::config (
     }
   }
 
+  # make sure we always have the service script
+  include couchdb::install::service
+
   # if it's not the standard service name, install the logrotate script
   if $name != 'couchdb' {
     file { "/etc/logrotate.d/${name}":
