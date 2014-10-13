@@ -20,11 +20,13 @@ define couchdb::install::one (
     seltype => 'couchdb_log_t'
   }
 
-  selinux::filecontext { "/etc/${name}(/.*)?":
-    seltype => 'couchdb_conf_t'
+  selinux::filecontext { "/etc/${name}":
+    seltype => 'couchdb_conf_t',
+    recurse => true
   }
 
-  selinux::filecontext { "/var/lib/${name}(/.*)?":
-    seltype => 'couchdb_var_lib_t'
+  selinux::filecontext { "/var/lib/${name}":
+    seltype => 'couchdb_var_lib_t',
+    recurse => true
   }
 }
