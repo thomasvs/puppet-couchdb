@@ -13,4 +13,18 @@ define couchdb::install::one (
   }
 
   couchdb::install::service::initinit { $name: }
+
+  # set the same filecontext on named couchdb services as the original
+  # couchdb directories
+  selinux::filecontext { "/var/log/${name}":
+    seltype => 'couchdb_log_t'
+  }
+
+  selinux::filecontext { "/etc/${name}(/.*)?":
+    seltype => 'couchdb_conf_t'
+  }
+
+  selinux::filecontext { "/var/lib/${name}(/.*)?":
+    seltype => 'couchdb_var_lib_t'
+  }
 }
