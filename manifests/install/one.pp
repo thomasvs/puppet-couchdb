@@ -8,6 +8,8 @@
 define couchdb::install::one (
 ) {
 
+  include ::selinux
+
   if $name !~ /^couchdb/ {
     fail("Couchdb::Config[${name}]: namevar must start with couchdb")
   }
