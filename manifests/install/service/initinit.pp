@@ -16,7 +16,7 @@ define couchdb::install::service::initinit {
         ensure => present,
         owner  => root,
         group  => root,
-        mode   => 0755,
+        mode   => '0755',
         source => 'puppet:///modules/couchdb/install/service'
       }
     }

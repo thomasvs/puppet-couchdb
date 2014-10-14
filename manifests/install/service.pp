@@ -13,7 +13,7 @@ class couchdb::install::service {
       ensure  => present,
       owner   => root,
       group   => root,
-      mode    => 0644,
+      mode    => '0644',
       source  => 'puppet:///modules/couchdb/install/couchdb-instance@.service',
       require => Exec['couchdb::install::service-systemd-daemon-reload'],
     }
