@@ -14,6 +14,7 @@ describe 'couchdb::config' do
 
   context 'config for couchdb-feat' do
     let(:title) { 'couchdb-feat' }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       should include_class('couchdb::install')
@@ -28,6 +29,7 @@ describe 'couchdb::config' do
         :admins => { 'admin1' => 'password1', 'admin2' => 'password2' },
         :require_valid_user => true
     } }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       should contain_file('/etc/couchdb-feat/local.ini') \
@@ -41,6 +43,7 @@ describe 'couchdb::config' do
     let(:params) { {
         :require_valid_user => false
     } }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       should contain_file('/etc/couchdb-feat/local.ini') \
@@ -50,6 +53,7 @@ describe 'couchdb::config' do
 
   context 'config for couchdb-feat with require_valid_user undef' do
     let(:title) { 'couchdb-feat' }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       should contain_file('/etc/couchdb-feat/local.ini') \
@@ -62,6 +66,7 @@ describe 'couchdb::config' do
     let(:params) { {
         :bind_address => '0.0.0.0'
     } }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       should contain_file('/etc/couchdb-feat/local.ini') \
@@ -74,6 +79,7 @@ describe 'couchdb::config' do
     let(:params) { {
         :ssl_cert_file => '/etc/cert'
     } }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       expect {
@@ -89,6 +95,7 @@ describe 'couchdb::config' do
         :ssl_key_file => '/etc/couchdb/key.pem',
         :ssl_port => '7531'
     } }
+    let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
       should contain_file('/etc/couchdb-feat/local.ini') \
