@@ -21,8 +21,8 @@ class couchdb::params {
     }
     default: {
       # FIXME: can we detect systemd and use it?
-      fail('Unsupported operating system')
+      fail("Unsupported operating system ${::operatingsystem}")
     }
   }
-  
+
 }
