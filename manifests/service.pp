@@ -1,3 +1,7 @@
+# = Define couchdb::service
+#
+# This define sets up the service for a CouchDB instance.
+#
 define couchdb::service () {
 
   include couchdb::params

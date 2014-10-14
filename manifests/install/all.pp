@@ -1,3 +1,7 @@
+# = Class couchdb::install::all
+#
+# This class installs everything needed for any of the CouchDB instances.
+#
 class couchdb::install::all {
   package { 'couchdb':
     ensure  => present,
