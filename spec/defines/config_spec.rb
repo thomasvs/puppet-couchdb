@@ -17,7 +17,7 @@ describe 'couchdb::config' do
     let(:facts) { { :operatingsystem => 'Fedora' } }
 
     it do
-      should include_class('couchdb::install')
+      should contain_couchdb__install('couchdb-feat')
 
       should contain_file('/etc/couchdb-feat/local.ini')
     end
