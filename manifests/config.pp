@@ -9,19 +9,23 @@
 # [* namevar *]
 #   name of the couchdb service.  Should start with 'couchdb'
 #
-# [* ssl_cert_file *]
-#   The SSL certificate file to use for SSL, in .pem format
-#
-# [* ssl_key *]
-#   The SSL key file to use for SSL, in .pem format
-#
-# [* ssl_port *]
-#   The SSL port to run CouchDB on.
-#   Default: 6984
+# [* port *]
+#   The normal HTTP port to run CouchDB on.
+#   Default: 5984
 #
 # [* bind_address *]
 #   The address for CouchDB to bind to.
 #   Default: 127.0.0.1
+#
+# [* ssl_cert_file *]
+#   The SSL certificate file to use for SSL, in .pem format
+#
+# [* ssl_key_file *]
+#   The SSL key file to use for SSL, in .pem format
+#
+# [* ssl_port *]
+#   The SSL port to run CouchDB on.
+#   Default: undef
 #
 # [* query_servers *]
 #   A list of additional query servers to run.
@@ -45,6 +49,7 @@
 #
 # == Author
 #   Thomas Vander Stichele (thomas (at) apestaart (dot) org
+#
 define couchdb::config (
   $port=5984,
   $bind_address=undef,
