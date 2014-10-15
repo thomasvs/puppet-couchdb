@@ -19,7 +19,8 @@ define couchdb::install::one (
   # set the same filecontext on named couchdb services as the original
   # couchdb directories
   selinux::filecontext { "/var/log/${name}":
-    seltype => 'couchdb_log_t'
+    seltype => 'couchdb_log_t',
+    recurse => true
   }
 
   selinux::filecontext { "/etc/${name}":
