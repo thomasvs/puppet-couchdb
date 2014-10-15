@@ -97,6 +97,21 @@ define couchdb::config (
     notify  => Couchdb::Service[$name],
   }
 
+  file { "/etc/${name}/write.ini":
+    ensure  => file,
+    owner   => $owner,
+    group   => $group,
+    mode    => $mode,
+    require => [
+      File["/etc/${name}"],
+      File["/var/lib/${name}"],
+      File["/var/log/${name}"],
+      Couchdb::Install[$name],
+    ],
+    notify  => Couchdb::Service[$name],
+  }
+
+
   file { "/var/lib/${name}":
     ensure  => directory,
     owner   => $dirowner,
